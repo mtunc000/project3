@@ -10,6 +10,7 @@ Node.Js,
 MVP
 
 Phase One
+Search for new technologies
 clinic components
 individiual components
 categorization of the complimentary and alternative medicine
@@ -17,6 +18,16 @@ categorization of the complimentary and alternative medicine
 Phaase Two
 Authentication
 MySQL connection
+
+
+Phase 3
+Mobile deployment
+Heroku deployment
+
+
+Top skills
+Mustafa: Full Stack --- React.JS
+
 
 
 
