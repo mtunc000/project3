@@ -18,6 +18,7 @@ categorization of the complimentary and alternative medicine
 Phaase Two
 Authentication
 MySQL connection
+Redux
 
 
 Phase 3
