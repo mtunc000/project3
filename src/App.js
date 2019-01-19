@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Clinic from "./Clinic/Clinic";
 import Individual from "./Individual/Individual";
+import Aux from "./hoc/Aux";
 
 class App extends Component {
   state = {
@@ -15,17 +16,24 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1> Project 3 Starting </h1>{" "}
-        <input
-          type="text"
-          onChange={this.inputChangeHandler}
-          value={this.state.userInput}
-        />{" "}
+      <Aux className="App">
+        <h1> Project 3 Starting </h1>
+        <Clinic inputLength={this.state.userInput.length}>
+          <input
+            type="text"
+            onChange={this.inputChangeHandler}
+            value={this.state.userInput}
+          />
+        </Clinic>
         <br /> <br />
-        <Clinic inputLength={this.state.userInput.length} /> <br /> <br />
-        <Individual inputLength={this.state.userInput.length} />{" "}
-      </div>
+        <Individual inputLength={this.state.userInput.length}>
+          <input
+            type="text"
+            onChange={this.inputChangeHandler}
+            value={this.state.userInput}
+          />
+        </Individual>
+      </Aux>
     );
   }
 }
