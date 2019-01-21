@@ -339,12 +339,22 @@ module.exports = {
           // files. If you use code splitting, async bundles will have their own separate CSS chunk file.
           // By default we support CSS Modules with the extension .module.css
           {
-            test: cssRegex,
-            exclude: cssModuleRegex,
-            loader: getStyleLoaders({
-              importLoaders: 1,
-              sourceMap: shouldUseSourceMap
-            }),
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: require.resolve('style-loader'),
+                  use: [
+                    {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: shouldUseSourceMap,
+                        modules: true,
+                        localIdentName: '[name]__[local]__[hash:base64:5]'
+                      },
+                    },
             // Don't consider CSS imports dead code even if the
             // containing package claims to have no side effects.
             // Remove this when webpack adds a warning or an error for this.
@@ -353,6 +363,24 @@ module.exports = {
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
           // using the extension .module.css
+          // (module.exports = {
+          //   module: {
+          //     loaders: [
+          //       { test: /\.css$/, loader: "style-loader!css-loader" }
+          //       // ...
+          //     ]
+          //   }
+          // }),
+          // (module.exports = {
+          //   module: {
+          //     rules: [
+          //       {
+          //         test: /\.css$/,
+          //         use: ["style-loader", "css-loader"]
+          //       }
+          //     ]
+          //   }
+          // }),
           {
             test: cssModuleRegex,
             loader: getStyleLoaders({

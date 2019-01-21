@@ -270,11 +270,16 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           // By default we support CSS Modules with the extension .module.css
           {
-            test: cssRegex,
-            exclude: cssModuleRegex,
-            use: getStyleLoaders({
-              importLoaders: 1
-            })
+            test: /\.css$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  modules: true,
+                  localIdentName: '[name]__[local]__[hash:base64:5]'
+                },
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
           // using the extension .module.css
@@ -283,8 +288,19 @@ module.exports = {
             use: getStyleLoaders({
               importLoaders: 1,
               modules: true,
-              localIndentName: "[name]__[local]__[hash:base64:5]",
-              getLocalIdent: getCSSModuleLocalIdent
+              module: {
+                loaders: [
+                  { test: /.css$/, loader: "style-loader" },
+                  {
+                    test: /.css$/,
+                    loader: "css-loader",
+                    query: {
+                      modules: true,
+                      localIdentName: "[name][local]_[hash:base64:5]"
+                    }
+                  }
+                ]
+              }
             })
           },
           // Opt-in support for SASS (using .scss or .sass extensions).
@@ -299,6 +315,25 @@ module.exports = {
           },
           // Adds support for CSS Modules, but using SASS
           // using the extension .module.scss or .module.sass
+          // (module.exports = {
+          //   module: {
+          //     loaders: [
+          //       { test: /\.css$/, loader: "style-loader!css-loader" }
+          //       // ...
+          //     ]
+          //   }
+          // }),
+        //   module.exports = {
+        //     module: {
+        //         rules: [
+        //             {
+        //                 test: /\.css$/,
+        //                 use: [ 'style-loader', 'css-loader' ]
+        //             }
+        //         ]
+        //     }
+        // }
+
           {
             test: sassModuleRegex,
             use: getStyleLoaders(
@@ -310,6 +345,7 @@ module.exports = {
               "sass-loader"
             )
           },
+
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
           // In production, they would get copied to the `build` folder.

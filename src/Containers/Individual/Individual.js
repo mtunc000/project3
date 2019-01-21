@@ -1,51 +1,41 @@
 import React, { Component } from "react";
 import "./Individual.css";
-import Logo from "../Logo/Logo";
-
-// let individual = props => {
-//   return (
-//     <div className={classes.Individual}>
-//       {props.inputLength >= 6 ? (
-//         <p>"long enough"</p>
-//       ) : (
-//         <p>"please use at least 6 character"</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default individual;
+// import Logo from "../../Components/Logo/Logo";
+import Aux from "../../hoc/Aux";
+import AltMed from "../../Components/AltMed/altMed";
 
 class Individual extends Component {
-  state = {
-    category: "",
-    specialty: "",
-    personal: "",
-    street: "",
-    city: "",
-    state: "",
-    zip: ""
-  };
+  // state = {
+  //   category: "",
+  //   specialty: "",
+  //   personal: "",
+  //   street: "",
+  //   city: "",
+  //   state: "",
+  //   zip: ""
+  // };
 
   render() {
     return (
-      <div>
-        <div className="Individual">
+      <Aux>
+        <AltMed />
+        <div> Build Controls</div>
+        {/* <div className="Individual">
           <h1>Choose a Category</h1>
           <Logo height={100} source={this.state.category} />
           <select
             value={this.state.category}
             onChange={event => this.setState({ category: event.target.value })}
           >
-            <option value="bioEnergy.jpg">Bio-Energy</option>
-            <option value="ThetaHealing.jpg">Theta-Healing</option>
             <option value="acupuncture.jpg">Accupuncture</option>
-
-            <option value="meditation.jpg">Meditation</option>
+            <option value="bioEnergy.jpg">Bio-Energy</option>
             <option value="Chiropractor.jpg">Chiropractic</option>
+            <option value="Hijama.jpeg">Hijama</option>
             <option value="Hydrotherapy.jpg">HydroTherapy</option>
             <option value="Massage Therapy.jpeg">MassageTheraphy</option>
+            <option value="meditation.jpg">Meditation</option>
             <option value="nutrition.jpg">Nutrition</option>
+            <option value="ThetaHealing.jpg">Theta-Healing</option>
             <option value="Other">Other</option>
           </select>
 
@@ -93,8 +83,8 @@ class Individual extends Component {
           />
 
           <button>Add Post</button>
-        </div>
-      </div>
+        </div> */}
+      </Aux>
     );
   }
 }
